@@ -1,0 +1,5 @@
+[
+{"user":"user1","password":"pe1", "level":"1", "token":"token1"},
+{"user":"user2","password":"pw2", "level": "2", "token":"token2"},
+{"user":"user3","password":"pw3", "level": "3", "token":"token3"}
+]

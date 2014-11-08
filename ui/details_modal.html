@@ -1,0 +1,94 @@
+<repeat group="{{ @dates }}" value="{{ @item }}">
+	<div class="modal fade" id="modal-{{ @item.id }}" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">Details f&uuml;r &quot;{{ @item.veranstaltung }}&quot;
+					<check if="{{ @SESSION.user_level > 1 }}">
+						<a href="/edit/{{ @item.id }}">
+							<button class="btn btn-sm btn-primary"><span class="fa fa-lg fa-pencil-square"></span></button>
+						</a>
+					</check>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table text-left">
+						<tr class="white">
+							<td><strong>Date</strong></td>
+							<td>{{ @format_date(@item.date)." ".@format_month(@item.date) }}</td>
+						</tr>
+						<tr class="yellow">
+							<td><strong>Veranstaltung</strong></td>
+							<td>{{ @item.veranstaltung }}</td>
+						</tr>
+						<tr class="{{ @location_class(@item.loc) }}">
+							<td><strong>Location</strong></td>
+							<td>{{ @location_word(@item.loc) }}</td>
+						</tr>
+						<tr class="grey">
+							<td><strong>Showtime</strong></td>
+							<td>{{ @format_time(@item.showtime) }} Uhr</td>
+						</tr>
+						<tr class="lila">
+							<td><strong>Get-In Band</strong></td>
+							<td>{{ @format_time(@item.get_in_band) }} Uhr</td>
+						</tr>
+						<tr class="reddish">
+							<td><strong>Get-In Local Crew</strong></td>
+							<td>{{ @format_time(@item.get_in_local_crew )}} Uhr</td>
+						</tr>
+						<tr class="yellow">
+							<td><strong>Rider</strong></td>
+							<td>{{ @rider_letter(@item.rider) }}</td>
+							</tr>
+						<tr class="grey">
+							<td><strong>Sound</strong></td>
+							<td>{{ @item.sound }}</td>
+						</tr>
+						<tr class="white">
+							<td><strong>Light</strong></td>
+							<td>{{ @item.light }}</td>
+						</tr>
+						<tr class="reddish">
+							<td><strong>TH</strong></td>
+							<td>{{ @item.th }}</td>
+						</tr>
+						<tr class="grey">
+							<td><strong>Bemerkung</strong></td>
+							<td>{{ @item.bemerkung }}</td>
+						</tr>
+						<tr class="yellow">
+							<td><strong>Agentur</strong></td>
+							<td>{{ @item.agentur }}</td>
+						</tr>
+						<tr class="grey">
+							<td><strong>Tech. Kontakt</strong></td>
+							<td>{{ @item.tech_kontakt }}</td>
+						</tr>
+						<tr class="white">
+							<td><strong>Backline TH</strong></td>
+							<td>{{ @item.backline_th }}</td>
+						</tr>
+						<tr class="grey">
+							<td><strong>Backline Rentals</strong></td>
+							<td>{{ @item.bl_rentals }}</td>
+						</tr>
+						<tr class="white">
+							<td><strong>Mikro Rentals</strong></td>
+							<td>{{ @item.micro_rentals }}</td>
+						</tr>
+						<tr class="grey">
+							<td><strong>Xtra Rentals</strong></td>
+							<td>{{ @item.xtra_rentals }}</td>
+						</tr>
+						<tr class="white">
+							<td><strong>Xtra Personal</strong></td>
+							<td>{{ @item.xtra_personal }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</repeat>

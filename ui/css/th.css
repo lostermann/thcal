@@ -1,0 +1,111 @@
+.login {
+	margin-top: 0px;
+}
+
+.loginform {
+	margin-top: 0px;
+}
+
+@media (min-width: 992px) {
+	.login {
+		margin-top: 100px;
+	}
+	
+	.loginform {
+		margin-top: 20px;
+	}
+	
+}
+
+.loginform h2 {
+	padding-bottom: 20px;
+}
+
+.thtable {
+	text-align:center;
+	border-collapse: separate;
+	border-spacing: 2px;
+}
+
+.width350 {
+	width: 350px;
+}
+
+.width15p {
+	width: 15%;
+}
+
+.top-offset {
+	padding-top: 30px;
+}
+
+.thtable th {
+	font-weight: bold;
+	background: #fff;
+}
+
+.thtable th, .thtable td {
+	border: none !important;
+	vertical-align: middle !important;
+	text-align: center !important;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.textblack {
+	color: #333;
+}
+
+.yellow {
+	background: #fffda9;
+}
+
+.greenish {
+	background: #e0edd4;
+}
+
+.reddish {
+	background: #ffc4ab;
+}
+
+.magentaish {
+	background: #f9d3e0;
+}
+
+.white {
+	background: #ddd;
+}
+
+.lila {
+	background: #aaadff;
+}
+
+.grey {
+	background: #bbb;
+}
+
+.pager-day li a {
+	width: 100px;
+}
+
+.pager-month li a {
+	width: 175px;
+}
+
+.btn-1 {
+	background:rgba(255,255,255,0.6);
+	color: #333333;
+}
+
+.btn-2 {
+		background: #d9d9d9;
+		color: #333333;
+}
+
+
+.defaultSubmit {
+	position: absolute;
+	right: 200%;
+}

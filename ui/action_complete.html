@@ -1,0 +1,24 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header">
+   	 <h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+   	</div>
+
+
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 text-center bg-primary">
+			<h2>Aktion abgeschlossen.</h2>
+			<h3>
+			<check if="{{ @POST.action == 'delete' }}">Eintrag wurde gelöscht.</check>
+			<check if="{{ @POST.action == 'save' }}">Eintrag wurde gesichert.</check>
+			<check if="{{ @POST.action == 'duplicate' }}">Eintrag wurde als Duplikat gesichert.</check>
+			</h3>
+			<p><a href="{{ @POST.backLink }}"><button id="backbutton" class="btn btn-default">Zurück</button></a></p>
+		</div>
+	</div>
+</div>
+
+<include href="footer.html" />

@@ -1,0 +1,85 @@
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		<check if="{{ @SESSION.user_level > 1 }}">
+			<a class="pull-right" href="/edit/{{ @item.id }}"><button data-tooltip="tooltip" data-placemebt="top" title="Eintrag bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+		</check>
+		<h4>{{ @item.veranstaltung }} ({{ @format_time(@item.showtime)}} Uhr)</h4>
+			
+		</div>
+		<table class="table">
+			<tr class="white">
+				<td class="col-xs-3"><b>Datum</b></td>
+				<td class="col-xs-9">{{ @format_date(@item.date) }} {{ @format_month(@item.date)}}</td>
+			</tr>
+			<tr class="yellow">
+				<td class="col-xs-3"><b><span class="hidden-xs">Veranstaltung</span><span class="visible-xs">Veranst.</span></b></td>
+				<td class="col-xs-9">{{ @item.veranstaltung }}</td>
+			</tr>
+			<tr class="{{ @location_class(@item.loc) }}">
+				<td class="col-xs-3"><b>Location</b></td>
+				<td class="col-xs-9">{{ @location_word(@item.loc) }}</td>
+			</tr>
+			<tr class="grey">
+				<td class="col-xs-3"><b>Showtime</b></td>
+				<td class="col-xs-9">{{ @format_time(@item.showtime) }} Uhr</td>
+			</tr>
+			<tr class="lila">
+				<td class="col-xs-3"><b>Get-In Band</b></td>
+				<td class="col-xs-9">{{ @format_time(@item.get_in_band) }} Uhr</td>
+			</tr>
+			<tr class="reddish">
+				<td class="col-xs-3"><b>Get-In Local Crew</b></td>
+				<td class="col-xs-9">{{ @format_time(@item.get_in_local_crew) }} Uhr</td>
+			</tr>
+			<tr class="yellow">
+				<td class="col-xs-3"><b>Rider</b></td>
+				<td class="col-xs-9">{{ @rider_letter(@item.rider) }}</td>
+			</tr>
+			<tr class="grey">
+				<td class="col-xs-3"><b>Sound</b></td>
+				<td class="col-xs-9">{{ @item.sound }}</td>
+			</tr>
+			<tr class="white">
+				<td class="col-xs-3"><b>Light</b></td>
+				<td class="col-xs-9">{{ @item.light }}</td>
+			</tr>
+			<tr class="reddish">
+				<td class="col-xs-3"><b>TH</b></td>
+				<td class="col-xs-9">{{ @item.th }}</td>
+			</tr>
+			<tr class="grey">
+				<td class="col-xs-3"><b>Bemerkung</b></td>
+				<td class="col-xs-9">{{ @item.bemerkung }}</td>
+			</tr>
+			<tr class="yellow">
+				<td class="col-xs-3"><b>Agentur</b></td>
+				<td class="col-xs-9">{{ @item.agentur }}</td>
+			</tr>
+			<tr class="grey">
+				<td class="col-xs-3"><b>Tech. Kontakt</b></td>
+				<td class="col-xs-9">{{ @item.tech_kontakt }}</td>
+			</tr>
+			<tr class="white">
+				<td class="col-xs-3"><b>Backline TH</b></td>
+				<td class="col-xs-9">{{ @item.backline_th }}</td>
+			</tr>
+			<tr class="grey">
+				<td class="col-xs-3"><b>Backline Rentals</b></td>
+				<td class="col-xs-9">{{ @item.bl_rentals }}</td>
+			</tr>
+			<tr class="white">
+				<td class="col-xs-3"><b>Mikro Rentals</b></td>
+				<td class="col-xs-9">{{ @item.micro_rentals }}</td>
+			</tr>
+			<tr class="grey">
+				<td class="col-xs-3"><b>Xtra Rentals</b></td>
+				<td class="col-xs-9">{{ @item.xtra_rentals }}</td>
+			</tr>
+			<tr class="white">
+				<td class="col-xs-3"><b>Xtra Personal</b></td>
+				<td class="col-xs-9">{{ @item.xtra_personal }}</td>
+			</tr>
+		</table>
+	</div>
+</div>

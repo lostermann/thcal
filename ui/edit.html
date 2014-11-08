@@ -1,0 +1,314 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+	    <h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<check if="{{ @POST.id == '' }}">
+			<true>
+				<h2>Neuen Termin erstellen</h2>
+			</true>
+			<false>
+				<h2>Eintrag bearbeiten: &quot;{{ @POST.veranstaltung }}&quot;</h2>
+			</false>
+		</check>
+	</div>
+	
+	<form class="form-horizontal hidden-xs hidden-sm" method="post" action="{{ @ALIASES.actionEntry }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+		
+		<div class="row">
+			<div class="col-md-6">
+			<div class="page-header">
+				<h3>Veranstaltungsinformationen</h3>
+			</div>
+				<div class="form-group">
+					<label for="date" class="col-md-4 control-label">Datum</label>
+					<div class="col-md-8">
+						<div class="input-group date" id="dp" data-date="{{ @entryDate }}" data-date-format="yyyy-mm-dd">
+							<input name="date" class="form-control" type="text" value="{{ @entryDate }}">
+							<span class="input-group-addon pointer"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="veranstaltung" class="col-md-4 control-label">Veranstaltung</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="veranstaltung" value="{{ @POST.veranstaltung }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Location</label>
+					<div class="col-md-8">
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="T" {{ @location_checked("T", @POST.loc) }}>Turm
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="K" {{ @location_checked("K", @POST.loc) }}>Keller
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="S" {{ @location_checked("S", @POST.loc) }}>Salon
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="n" {{ @location_checked("n", @POST.loc) }}>none
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="showtime" class="col-md-4 control-label">Showtime</label>
+					<div class="col-md-8">
+						<div class="input-group bootstrap-timepicker">
+							<input id="showtime" data-default-time="{{ @POST.showtime }}" name="showtime" class="form-control" type="text">
+							<span class="input-group-addon pointer"><i class="fa fa-clock-o"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="get_in_band" class="col-md-4 control-label">Get In Band</label>
+					<div class="col-md-8">
+						<div class="input-group bootstrap-timepicker">
+							<input id="get_in_band" name="get_in_band" data-default-time="{{ @POST.get_in_band }}" class="form-control" type="text">
+							<span class="input-group-addon pointer"><i class="fa fa-clock-o"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="get_in_local_crew" class="col-md-4 control-label">Get In Local Crew</label>
+					<div class="col-md-8">
+						<div class="input-group bootstrap-timepicker">
+							<input id="get_in_local_crew" name="get_in_local_crew" class="form-control" data-default-time="{{ @POST.get_in_local_crew }}" type="text">
+							<span class="input-group-addon pointer"><i class="fa fa-clock-o"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rider" class="col-md-4 control-label">Rider</label>
+					<div class="col-md-8">
+						<label class="checkbox-inline">
+						<input type="checkbox" name="rider" value="Y" {{ @rider_checked(@POST.rider) }}>Rider vorhanden</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="sound" class="col-md-4 control-label">Sound</label>
+					<div class="col-md-8">
+						<input type="text" name="sound" value="{{ @POST.sound }}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="light" class="col-md-4 control-label">Light</label>
+					<div class="col-md-8">
+						<input type="text" name="light" value="{{ @POST.light }}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="th" class="col-md-4 control-label">TH</label>
+					<div class="col-md-8">
+						<input type="text" name="th" value="{{ @POST.th }}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bemerkung" class="col-md-4 control-label">Bemerkung</label>
+					<div class="col-md-8">
+						<textarea class="form-control" name="bemerkung" rows="3">{{ @POST.bemerkung }}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="page-header">
+					<h3>Weitere Details</h3>
+				</div>
+				<div class="form-group">
+					<label for="agentur" class="col-md-4 control-label">Agentur</label>
+					<div class="col-md-8">
+						<input type="text" name="agentur" value="{{ @POST.agentur }}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tech_kontakt" class="col-md-4 control-label">Tech. Kontakt</label>
+					<div class="col-md-8">
+						<textarea name="tech_kontakt" class="form-control" rows="2">{{ @POST.tech_kontakt }}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="backline_th" class="col-md-4 control-label">Backline Treibhaus</label>
+					<div class="col-md-8">
+						<input type="text" name="backline_th" class="form-control" value="{{ @POST.backline_th }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bl_rentals" class="col-md-4 control-label">Backline Rentals</label>
+					<div class="col-md-8">
+						<input type="text" name="bl_rentals" class="form-control" value="{{ @POST.bl_rentals }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="micro_rentals" class="col-md-4 control-label">Micro Rentals</label>
+					<div class="col-md-8">
+						<input type="text" name="micro_rentals" class="form-control" value="{{ @POST.micro_rentals }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="xtra_rentals" class="col-md-4 control-label">Xtra Rentals</label>
+					<div class="col-md-8">
+						<input type="text" name="xtra_rentals" class="form-control" value="{{ @POST.xtra_rentals }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="xtra_personal" class="col-md-4 control-label">Xtra Personal</label>
+					<div class="col-md-8">
+						<input type="text" name="xtra_personal" class="form-control" value=" {{ @POST.xtra_personal }}">
+					</div>
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>
+					<input type="submit" name="action" value="save" class="defaultSubmit">
+					<check if="{{ @POST.id == '' }}">
+						<false>
+							<button name="action" value="delete" data-tooltip="tooltip" data-placement="top" title="Eintrag löschen" class="btn btn-danger"><span class="fa fa-lg fa-times"></span></button>
+							<button name="action" value="duplicate" data-tooltip="tooltip" data-placement="top" title="Als Duplikat speichern" class="btn btn-info"><span class="fa fa-lg fa-copy"></span></button>
+						</false>
+					</check>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<form class="form visible-xs visible-sm" method="post" action="{{ @ALIASES.actionEntry }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+
+			<div class="page-header">
+				<h3>Veranstaltungsinformationen</h3>
+			</div>
+			
+			<div class="form-group">
+					<label for="date" class="control-label">Datum</label>
+					<div class="input-group date" id="dp2" data-date="{{ @entryDate }}" data-date-format="yyyy-mm-dd">
+						<span class="input-group-addon pointer"><i class="fa fa-calendar"></i></span>
+						<input name="date" class="form-control" type="text" value="{{ @entryDate }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="veranstaltung" class="control-label">Veranstaltung</label>
+					<input type="text" class="form-control" name="veranstaltung" value="{{ @POST.veranstaltung }}">
+				</div>
+				<div class="form-group">
+					<label class="control-label">Location</label><br />
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="T" {{ @location_checked("T", @POST.loc) }}>Turm
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="K" {{ @location_checked("K", @POST.loc) }}>Keller
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="S" {{ @location_checked("S", @POST.loc) }}>Salon
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="loc" value="n" {{ @location_checked("n", @POST.loc) }}>none
+						</label>
+				</div>
+				<div class="form-group">
+					<label for="showtime" class="control-label">Showtime</label>
+					<div class="input-group bootstrap-timepicker">
+							<span class="input-group-addon pointer"><i class="fa fa-clock-o"></i></span>
+							<input id="showtime2" data-default-time="{{ @POST.showtime }}" name="showtime" class="form-control" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="get_in_band" class="control-label">Get In Band</label>
+						<div class="input-group bootstrap-timepicker">
+							<span class="input-group-addon pointer"><i class="fa fa-clock-o"></i></span>
+							<input id="get_in_band2" name="get_in_band" data-default-time="{{ @POST.get_in_band }}" class="form-control" type="text">
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="get_in_local_crew" class="control-label">Get In Local Crew</label>
+						<div class="input-group bootstrap-timepicker">
+						<span class="input-group-addon pointer"><i class="fa fa-clock-o"></i></span>
+						<input id="get_in_local_crew2" name="get_in_local_crew" class="form-control" data-default-time="{{ @POST.get_in_local_crew }}" type="text">
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="rider" class="control-label">Rider</label><br />
+						<label class="checkbox-inline">
+						<input type="checkbox" name="rider" value="Y" {{ @rider_checked(@POST.rider) }}>Rider vorhanden</label>
+				</div>
+				<div class="form-group">
+					<label for="sound" class="control-label">Sound</label>
+					<input type="text" name="sound" value="{{ @POST.sound }}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="light" class="control-label">Light</label>
+					<input type="text" name="light" value="{{ @POST.light }}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="th" class="control-label">TH</label>
+					<input type="text" name="th" value="{{ @POST.th }}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="bemerkung" class="control-label">Bemerkung</label>
+					<textarea class="form-control" name="bemerkung" rows="3">{{ @POST.bemerkung }}</textarea>
+				</div>
+				<div class="page-header">
+					<h3>Weitere Details</h3>
+				</div>
+				<div class="form-group">
+					<label for="agentur" class="control-label">Agentur</label>
+					<input type="text" name="agentur" value="{{ @POST.agentur }}" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="tech_kontakt" class="control-label">Tech. Kontakt</label>
+					<textarea name="tech_kontakt" class="form-control" rows="2">{{ @POST.tech_kontakt }}</textarea>
+				</div>
+				<div class="form-group">
+					<label for="backline_th" class="control-label">Backline Treibhaus</label>
+					<input type="text" name="backline_th" class="form-control" value="{{ @POST.backline_th }}">
+				</div>
+				<div class="form-group">
+					<label for="bl_rentals" class="control-label">Backline Rentals</label>
+					<input type="text" name="bl_rentals" class="form-control" value="{{ @POST.bl_rentals }}">
+				</div>
+				<div class="form-group">
+					<label for="micro_rentals" class="control-label">Micro Rentals</label>
+					<input type="text" name="micro_rentals" class="form-control" value="{{ @POST.micro_rentals }}">
+				</div>
+				<div class="form-group">
+					<label for="xtra_rentals" class="control-label">Xtra Rentals</label>
+					<input type="text" name="xtra_rentals" class="form-control" value="{{ @POST.xtra_rentals }}">
+				</div>
+				<div class="form-group">
+					<label for="xtra_personal" class="control-label">Xtra Personal</label>
+					<input type="text" name="xtra_personal" class="form-control" value=" {{ @POST.xtra_personal }}">
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>
+					<input type="submit" name="action" value="save" class="defaultSubmit">
+					<check if="{{ @POST.id == '' }}">
+						<false>
+							<button name="action" value="delete" data-tooltip="tooltip" data-placement="top" title="Eintrag löschen" class="btn btn-danger"><span class="fa fa-lg fa-times"></span></button>
+							<button name="action" value="duplicate" data-tooltip="tooltip" data-placement="top" title="Als Duplikat speichern" class="btn btn-info"><span class="fa fa-lg fa-copy"></span></button>
+						</false>
+					</check>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+				<p class="text-muted">&nbsp;</p>
+	</form>
+	
+</div>
+
+
+<include href="footer.html" />

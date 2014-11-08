@@ -1,0 +1,68 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+    	<h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<h2>Suche</h2>
+	</div>
+
+	<form class="form" method="POST">
+		<div class="input-group">
+			<input type="text" class="form-control" name="search" placeholder="Suchbegriff" value="{{ ( @search )}}">
+			<div class="input-group-btn">
+				<button type="submit" class="btn btn-primary form-control"><span class="fa fa-search"></span> Suchen</button>
+			</div>
+		</div>
+	</form>
+
+	<check if="{{ @search <> '' }}">
+	<table class="table thtable hidden-xs hidden-sm top-offset">
+		<thead>
+			<tr>
+				<th>Datum</th>
+				<th>Veranstaltung</th>
+				<th>Bemerkung</th>
+				<th>Agentur</th>
+				<th>Tech. Kontakt</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<repeat group="{{ @dates }}" value="{{ @item }}">
+			<tr class="pointer" data-toggle="modal" data-target="#modal-{{ @item.id }}">
+				<td class="white">{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</td>
+				<td class="yellow">{{ @item.veranstaltung }}</td>
+				<td class="grey">{{ @item.bemerkung }}</td>
+				<td class="yellow">{{ @item.agentur }}</td>
+				<td class= "grey">{{ @item.tech_kontakt }}</td>
+				<td class="lila width15p">
+					<button data-toggle="modal" data-target="#modal-{{ @item.id }}" class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
+					<check if="{{ @SESSION.user_level > 1 }}">
+						<a href="/edit/{{ @item.id }}"><button class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Eintrag bearbeiten"><span class="fa fa-pencil-square-o fa-lg"></span></button></a>
+					</check>
+				</td>
+			</tr>
+			</repeat>
+		</tbody>
+	</table>
+
+	<div class="list-group hidden-md hidden-lg top-offset">
+		<repeat group="{{ @dates }}" value="{{ @item }}">
+		<a href="/details/{{ @item.id }}" class="list-group-item">
+			<h4 class="list-group-item-heading">{{ @item.veranstaltung }}</h4>
+			<p class="list-group-item-text"><b>{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</b><br />Bemerkung: {{ @item.bemerkung }}<br />Agentur: {{ @item.agentur }}<br />Techn. Kontakt: {{ @item.tech_kontakt}}</p>
+		</a>
+		</repeat>
+	</div>
+	</check>
+
+</div>
+
+<include href="details_modal.html" />
+
+<include href="footer.html" />

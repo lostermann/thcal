@@ -1,0 +1,34 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+    	<h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center hidden-xs">
+		<h2>{{ @format_date(@date) }} {{ @format_month(@date) }}</h2>
+		<ul class="pager pager-day">
+			<li><a href="/day/{{ @prev_day }}"><span class="fa fa-chevron-circle-left"></span> {{ @format_date(@prev_day) }}</a></li>
+			<li><a href="/day/{{ @next_day }}">{{ @format_date(@next_day) }} <span class="fa fa-chevron-circle-right"></span></a></li>
+		</ul>
+	</div>
+
+	<div class="text-center visible-xs">
+		<h2>Tagesansicht</h2>
+		<ul class="pagination">
+			<li><a href="/day/{{ @prev_day }}"><span class="fa fa-chevron-circle-left fa-lg"></span></a></li>
+			<li class="disabled"><a href="#">{{@format_date(@date) }} {{ @format_month(@date)}}</a></li>
+			<li><a href="/day/{{ @next_day }}"><span class="fa fa-chevron-circle-right fa-lg"></span></a></li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<repeat group="{{ @dates }}" value="{{ @item }}">
+		<include href="details_panel.html" />
+	</repeat>
+	</div>
+</div>
+
+<include href="footer.html" />
