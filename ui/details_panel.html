@@ -1,9 +1,7 @@
 <div class="col-md-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-		<check if="{{ @SESSION.user_level > 1 }}">
 			<a class="pull-right" href="/edit/{{ @item.id }}"><button data-tooltip="tooltip" data-placemebt="top" title="Eintrag bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
-		</check>
 		<h4>{{ @item.veranstaltung }} ({{ @format_time(@item.showtime)}} Uhr)</h4>
 			
 		</div>

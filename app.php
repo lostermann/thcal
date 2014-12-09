@@ -58,6 +58,8 @@ class App {
 				break;
 			case 2:
 				echo Template::instance()->render('edit_crew.html');
+			case 1:
+				echo Template::instance()->render('edit_preview.html');
 				break;
 				}
 	}

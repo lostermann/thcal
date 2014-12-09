@@ -59,9 +59,7 @@
 				<td class="reddish">{{ @item.th }}</td>
 				<td class="lila">
 					<button data-toggle="modal" data-target="#modal-{{ @item.id }}" class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
-					<check if="{{ @SESSION.user_level > 1 }}">
-						<a href="/edit/{{ @item.id }}"><button data-tooltip="tooltip" data-placement="top" title="Eintrag bearbeiten" class="btn btn-sm btn-1"><span class="fa fa-pencil-square-o fa-lg"></span></button></a>
-					</check>
+					<a href="/edit/{{ @item.id }}"><button data-tooltip="tooltip" data-placement="top" title="Eintrag bearbeiten" class="btn btn-sm btn-1"><span class="fa fa-pencil-square-o fa-lg"></span></button></a>
 				</td>
 			</tr>
 			</repeat>

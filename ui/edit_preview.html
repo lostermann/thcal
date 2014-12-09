@@ -1,0 +1,244 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+	    <h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<h2>Eintrag bearbeiten: &quot;{{ @POST.veranstaltung }}&quot;</h2>
+	</div>
+	
+	<form class="form-horizontal hidden-xs hidden-sm" method="post" action="{{ @ALIASES.actionEntry }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+		
+		<div class="row">
+			<div class="col-md-6">
+			<div class="page-header">
+				<h3>Veranstaltungsinformationen</h3>
+			</div>
+				<div class="form-group">
+					<label for="date" class="col-md-4 control-label">Datum</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @format_date(@POST.date) }} {{ @format_month(@POST.date) }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="veranstaltung" class="col-md-4 control-label">Veranstaltung</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.veranstaltung }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Location</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @location_word(@POST.loc) }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="showtime" class="col-md-4 control-label">Showtime</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @format_time(@POST.showtime) }} Uhr</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="get_in_band" class="col-md-4 control-label">Get In Band</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @format_time(@POST.get_in_band) }} Uhr</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="get_in_local_crew" class="col-md-4 control-label">Get In Local Crew</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @format_time(@POST.get_in_local_crew) }} Uhr</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rider" class="col-md-4 control-label">Rider</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @rider_letter(@POST.rider) }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Sound</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.sound }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Light</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.light }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="th" class="col-md-4 control-label">TH</label>
+					<div class="col-md-8">
+						<input type="text" name="th" value="{{ @POST.th }}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bemerkung" class="col-md-4 control-label">Bemerkung</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.bemerkung }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="page-header">
+					<h3>Weitere Details</h3>
+				</div>
+				<div class="form-group">
+					<label for="agentur" class="col-md-4 control-label">Agentur</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.agentur }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tech_kontakt" class="col-md-4 control-label">Tech. Kontakt</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.tech_kontakt }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="backline_th" class="col-md-4 control-label">Backline Treibhaus</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.backline_th }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bl_rentals" class="col-md-4 control-label">Backline Rentals</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.bl_rentals }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="micro_rentals" class="col-md-4 control-label">Micro Rentals</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.micro_rentals }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="xtra_rentals" class="col-md-4 control-label">Xtra Rentals</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.xtra_rentals }}</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="xtra_personal" class="col-md-4 control-label">Xtra Personal</label>
+					<div class="col-md-8">
+						<p class="form-control-static">{{ @POST.xtra_personal }}</p>
+					</div>
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<form class="form visible-xs visible-sm" method="post" action="{{ @ALIASES.actionEntry }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+
+			<div class="page-header">
+				<h3>Veranstaltung</h3>
+			</div>
+			
+			<div class="form-group">
+					<label for="date" class="control-label">Datum</label>
+					<p class="form-control-static">{{ @format_date(@POST.date) }} {{ @format_month(@POST.date )}}</p>
+			</div>
+			<div class="form-group">
+					<label for="veranstaltung" class="control-label">Veranstaltung</label>
+					<p class="form-control-static">{{ @POST.veranstaltung }}</p>
+			</div>
+			<div class="form-group">
+					<label class="control-label">Location</label><br />
+					<p class="form-control-static">{{ @location_word(@POST.loc) }}</p>
+			</div>
+			<div class="form-group">
+					<label for="showtime" class="control-label">Showtime</label>
+					<p class="form-control-static">{{ @format_time(@POST.showtime) }} Uhr</p>
+			</div>
+			<div class="form-group">
+					<label for="get_in_band" class="control-label">Get In Band</label>
+					<p class="form-control-static">{{ @format_time(@POST.get_in_band) }} Uhr</p>
+			</div>
+			<div class="form-group">
+					<label for="get_in_local_crew" class="control-label">Get In Local Crew</label>
+					<p class="form-control-static">{{ @format_time(@POST.get_in_local_crew) }} Uhr</p>
+			</div>
+			<div class="form-group">
+					<label for="rider" class="control-label">Rider</label>
+					<p class="form-control-static">{{ @rider_letter(@POST.rider) }}</p>
+			</div>
+			<div class="form-group">
+					<label for="sound" class="control-label">Sound</label>
+					<p class="form-control-static">{{ @POST.sound }}</p>
+			</div>
+			<div class="form-group">
+					<label for="light" class="control-label">Light</label>
+					<p class="form-control-static">{{ @POST.light }}</p>
+			</div>
+			<div class="form-group">
+					<label for="th" class="control-label">TH</label>
+					<input type="text" name="th" class="form-control" value="{{ @POST.th }}">
+			</div>
+			<div class="form-group">
+					<label for="bemerkung" class="control-label">Bemerkung</label>
+					<p class="form-control-static">{{ @POST.bemerkung }}</p>
+			</div>
+			<div class="page-header">
+					<h3>Weitere Details</h3>
+			</div>
+			<div class="form-group">
+					<label for="agentur" class="control-label">Agentur</label>
+					<p class="form-control-static">{{ @POST.agentur }}</p>
+			</div>
+			<div class="form-group">
+					<label for="tech_kontakt" class="control-label">Tech. Kontakt</label>
+					<p class="form-control-static">{{ @POST.tech_kontakt }}</p>
+			</div>
+			<div class="form-group">
+					<label for="backline_th" class="control-label">Backline Treibhaus</label>
+					<p class="form-control-static">{{ @POST.backline_th }}</p>
+			</div>
+			<div class="form-group">
+					<label for="bl_rentals" class="control-label">Backline Rentals</label>
+					<p class="form-control-static">{{ @POST.bl_rentals }}</p>
+			</div>
+			<div class="form-group">
+					<label for="micro_rentals" class="control-label">Micro Rentals</label>
+					<p class="form-control-static">{{ @POST.micro_rentals }}</p>
+			</div>
+			<div class="form-group">
+					<label for="xtra_rentals" class="control-label">Xtra Rentals</label>
+					<p class="form-control-static">{{ @POST.xtra_rentals }}</p>
+			</div>
+			<div class="form-group">
+					<label for="xtra_personal" class="control-label">Xtra Personal</label>
+					<p class="form-control-static">{{ @POST.xtra_personal }}</p>
+			</div>
+			<div class="page-header">
+					<h3>Aktionen</h3>
+			</div>
+			<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+			</div>
+			<p class="text-muted">&nbsp;</p>
+	</form>
+</div>
+
+
+<include href="footer.html" />

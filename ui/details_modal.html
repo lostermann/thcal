@@ -5,11 +5,10 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<h4 class="modal-title">Details f&uuml;r &quot;{{ @item.veranstaltung }}&quot;
-					<check if="{{ @SESSION.user_level > 1 }}">
 						<a href="/edit/{{ @item.id }}">
 							<button class="btn btn-sm btn-primary"><span class="fa fa-lg fa-pencil-square"></span></button>
 						</a>
-					</check>
+					
 					</h4>
 				</div>
 				<div class="modal-body">
