@@ -86,4 +86,9 @@ $f3->set('extract_month',
 		$a = explode("-", $m);
 		return $a[0]."-".$a[1];
 });
+
+$f3->set('lowercase',
+	function($s) {
+		return strtolower($s);
+});
 ?>

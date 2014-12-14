@@ -54,9 +54,9 @@
 				<td class="lila">{{ @format_time(@item.get_in_band) }}</td>
 				<td class="reddish">{{ @format_time(@item.get_in_local_crew) }}</td>
 				<td class="yellow">{{ @rider_letter(@item.rider) }}</td>
-				<td class="grey">{{ @item.sound }}</td>
-				<td class="white">{{ @item.light }}</td>
-				<td class="reddish">{{ @item.th }}</td>
+				<td class="grey">{{ @lowercase(@item.sound) }}</td>
+				<td class="white">{{ @lowercase(@item.light) }}</td>
+				<td class="reddish">{{ @lowercase(@item.th) }}</td>
 				<td class="lila">
 					<button data-toggle="modal" data-target="#modal-{{ @item.id }}" class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
 					<a href="/edit/{{ @item.id }}"><button data-tooltip="tooltip" data-placement="top" title="Eintrag bearbeiten" class="btn btn-sm btn-1"><span class="fa fa-pencil-square-o fa-lg"></span></button></a>
@@ -71,7 +71,7 @@
 		<a href="/details/{{ @item.id }}" class="list-group-item">
 			<span class="badge textblack {{ @location_class(@item.loc) }}">{{ @item.loc }}</span>
 			<h4 class="list-group-item-heading">{{ @format_date(@item.date)}}: {{ @item.veranstaltung }}</h4>
-			<p class="list-group-item-text"><span class="label label-default grey textblack">{{ @format_time(@item.showtime) }}</span> <span class="label label-default lila textblack">{{ @format_time(@item.get_in_band)}}</span> <span class="label label-default reddish textblack">{{ @format_time(@item.get_in_local_crew)}}</span> <span class="label label-default">S: {{ @item.sound }} L: {{ @item.light }}</span></p>
+			<p class="list-group-item-text"><span class="label label-default grey textblack">{{ @format_time(@item.showtime) }}</span> <span class="label label-default lila textblack">{{ @format_time(@item.get_in_band)}}</span> <span class="label label-default reddish textblack">{{ @format_time(@item.get_in_local_crew)}}</span> <span class="label label-default">S: {{ @lowercase(@item.sound) }} L: {{ @lowercase(@item.light) }}</span></p>
 		</a>
 		</repeat>
 	</div>
