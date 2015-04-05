@@ -1,0 +1,62 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+    	<h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<h2>ToDos</h2>
+	</div>
+
+	
+	<table class="table table-striped hidden-xs hidden-sm">
+				<thead>
+					<th>Status</th>
+					<th>Datum</th>
+					<th>Titel</th>
+					<th>Bearbeiter</th>
+					<th>Kommentar</th>
+					<th>Aktion</th>
+				</thead>
+				<tbody>
+					<repeat group="{{ @todos }}" value="{{ @item }}">
+						<tr>
+							<td>{{ @todos_icon(@item.status) }}</td>
+							<td>{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</td>
+							<td>{{ @item.title }}</td>
+							<td>{{ @item.bearbeiter }}</td>
+							<td>{{ @item.kommentar }}</td>
+							<td>
+								<a href="{{ 'editTodo', 'id='.@item.id | alias }}">
+									<button data-tooltip="tooltip" data-placemebt="top" title="ToDo bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+							</td>
+						</tr>
+					</repeat>
+				</tbody>
+			</table>
+
+			
+			<repeat group="{{ @todos }}" value="{{ @item }}">
+					<div class="panel panel-default hidden-md hidden-lg">
+					<div class="panel-heading">
+					<a class="pull-right" href="{{ 'editTodo', 'id='.@item.id | alias }}"><button data-tooltip="tooltip" data-placemebt="top" title="ToDo bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+		<h4>{{ @todos_icon(@item.status) }} &nbsp; {{ @item.title }} ({{ @format_date(@item.date) }} {{ @format_month(@item.date) }})</h4>
+			
+		</div>
+		<div class="panel-body">
+			<p>{{ @item.kommentar }}</p>
+			<check if="{{ @item.bearbeiter <> '' }}">
+				<p><em>Bearbeiter: {{ @item.bearbeiter }}</em></p>	
+			</check>
+		</div>
+	</div>
+				
+					
+					</repeat>
+					
+					</div>
+
+<include href="footer.html" />

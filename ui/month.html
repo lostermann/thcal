@@ -1,6 +1,8 @@
 <include href="header.html" />
 <include href="nav.html" />
 
+<include href="details_modal.html" />
+
 <div class="container">
 
 	<div class="page-header hidden-xs">
@@ -58,7 +60,7 @@
 				<td class="white">{{ @lowercase(@item.light) }}</td>
 				<td class="reddish">{{ @lowercase(@item.th) }}</td>
 				<td class="lila">
-					<button data-toggle="modal" data-target="#modal-{{ @item.id }}" class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
+					<button class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
 					<a href="/edit/{{ @item.id }}"><button data-tooltip="tooltip" data-placement="top" title="Eintrag bearbeiten" class="btn btn-sm btn-1"><span class="fa fa-pencil-square-o fa-lg"></span></button></a>
 				</td>
 			</tr>
@@ -77,8 +79,5 @@
 	</div>
 	<p class="text-center"><a class="text-muted" href="{{ @ALIASES.about }}">Über dieses Tool</a></p>
 </div>
-
-<include href="details_modal.html" />
-
 
 <include href="footer.html" />

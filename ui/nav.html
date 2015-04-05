@@ -12,18 +12,27 @@
 
 		<div class="collapse navbar-collapse" id="nav">
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="{{ @ALIASES.currentMonth }}">Monatsansicht</a></li>
-				<li><a href="{{ @ALIASES.today }}">Tagesansicht</a></li>
-				<li class="visible-xs visible-sm"><a href="{{ @ALIASES.search }}">Suche</a></li>
+				 <li class="dropdown">
+				 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kalender <span class="caret"></span></a>
+				 	<ul class="dropdown-menu" role="menu">
+				 		<li><a href="{{ @ALIASES.currentMonth }}">Monatsansicht</a></li>
+				 		<li><a href="{{ @ALIASES.today }}">Tagesansicht</a></li>
+				 	</ul>
+				 </li>
+				 <li><a href="{{ @ALIASES.notes }}">Notizen</a></li>
+				 <li><a href="{{ @ALIASES.todos }}">ToDos <check if="{{ @new_todos() > 0 }}"><span class="badge">{{ @new_todos() }}</span></check></a></li>
+				<li class="hidden-lg"><a href="{{ @ALIASES.search }}">Suche</a></li>
 				<check if="{{ @SESSION.user_level == 3 }}">
 					<li><a href="{{ @ALIASES.backup }}">Backup</a></li>
-					<li class="visible-xs"><a href="/new/{{ @dateNewEntry }}">Neuen Eintrag</a></li>
+					<li class="visible-xs"><a href="{{ 'newEntryD', 'date='.@dateNewEntry | alias }}">Neuen Termin</a></li>
 				</check>
+				<li class="visible-xs"><a href="{{ 'newNoteD', 'date='.@dateNewEntry | alias }}">Neue Notiz</a></li>
+				<li class="visible-xs"><a href="/new/{{ @dateNewEntry }}">Neues ToDo</a></li>
 				<li class="visible-xs"><a href="{{ @ALIASES.logout }}">Abmelden</a></li>
 			</ul>
 			
 			<div class="navbar-right hidden-xs">
-				<form class="navbar-form navbar-left hidden-sm hidden-xs" action="{{ @ALIASES.search }}" method="POST" role="search">
+				<form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" action="{{ @ALIASES.search }}" method="POST" role="search">
 					<div class="form-group">
 						<div class="input-group width350">
 							<input type="text" name="search" class="form-control" placeholder="Suchbegriff">
@@ -34,8 +43,10 @@
 					</div>
 				</form>
 				<check if="{{ @SESSION.user_level == 3 }}">
-					<a href="/new/{{ @dateNewEntry }}"><button class="btn btn-sm btn-success navbar-btn" data-tooltip="tooltip" data-placement="bottom" title="Neuen Termin erstellen"><span class="fa fa-plus-square fa-lg"></span></button></a>
+					<a href="{{ 'newEntryD', 'date='.@dateNewEntry | alias }}"><button class="btn btn-sm btn-success navbar-btn" data-tooltip="tooltip" data-placement="bottom" title="Neuen Termin erstellen"><span class="fa fa-plus-square fa-lg"></span></button></a>
 				</check>
+				<a href="{{ 'newNoteD', 'date='.@dateNewEntry | alias }}"><button class="btn btn-sm btn-success navbar-btn" data-tooltip="tooltip" data-placement="bottom" title="Neue Notiz erstellen"><span class="fa fa-comment fa-lg"></span></button></a>
+				<a href="{{ 'newTodoD', 'date='.@dateNewEntry | alias }}"><button class="btn btn-sm btn-success navbar-btn" data-tooltip="tooltip" data-placement="bottom" title="Neues ToDo erstellen"><span class="fa fa-inbox fa-lg"></span></button></a>
 				<a href="{{ @ALIASES.logout }}"><button class="btn btn-sm btn-2 navbar-btn"><span class="fa fa-lg fa-sign-out" data-tooltip="tooltip" data-placement="bottom" title="Abmelden"></span></button></a>
 			</div>
 				

@@ -2,7 +2,9 @@
 
 // Establish database connection to SQL
 $db = new DB\SQL('mysql:host=localhost;dbname='.$f3->get('DB_NAME'), $f3->get('DB_USER'), $f3->get('DB_PASS'));
-$f3->set('db', new DB\SQL\Mapper($db, 'thcal'));
+$f3->set('db_events', new DB\SQL\Mapper($db, 'thcal'));
+$f3->set('db_notes', new DB\SQL\Mapper($db, 'thcal_notes'));
+$f3->set('db_todos', new DB\SQL\Mapper($db, 'thcal_todos'));
 
 function logged_in() {
 	global $f3;
@@ -34,7 +36,7 @@ function logged_in() {
 				// The token belongs to an actual user.
 				return true;
 			} else {
-				// The SESSION.token does not match the user DB.
+				// The SESSION.token does not match the user DB.;
 				echo Template::instance()->render('session_expired.html');
 				return false;
 			}
@@ -56,7 +58,7 @@ function logged_in() {
 		} else {
 			// User is not logged in.
 			$f3->set('SESSION.user_level', '');
-			echo Template::instance()->render('session_expired.html');
+			// echo Template::instance()->render('session_expired.html');
 			return false;
 		}
 }
@@ -70,7 +72,7 @@ function get_events_month() {
 	
 	// Get entries from DB
 		$sql_limits = "date >= \"".$f3->get('date')."-01\" AND date < \"".$f3->get('next_month')."-01\"";	
-		$f3->set('dates', $f3->get('db')->find($sql_limits, array("order" => "date ASC")));
+		$f3->set('dates', $f3->get('db_events')->find($sql_limits, array("order" => "date ASC")));
 }
 
 function get_events_day() {
@@ -82,7 +84,7 @@ function get_events_day() {
 	
 	// Get entries from DB
 		$sql_limits = "date = \"".$f3->get('date')."\"";
-		$f3->set('dates', $f3->get('db')->find($sql_limits, array("order" => "showtime ASC")));
+		$f3->set('dates', $f3->get('db_events')->find($sql_limits, array("order" => "showtime ASC")));
 	}
 
 function get_events_search() {
@@ -90,7 +92,31 @@ function get_events_search() {
 
 	// Get entries from DB
 		$s = "%".$f3->get('search')."%";
-		$f3->set('dates', $f3->get('db')->find(array('(veranstaltung LIKE ?) OR (bemerkung LIKE ?) OR (agentur LIKE ?) OR (tech_kontakt LIKE ?)', $s, $s, $s, $s), array("order" => "date ASC")));
+		$f3->set('dates', $f3->get('db_events')->find(array('(veranstaltung LIKE ?) OR (bemerkung LIKE ?) OR (agentur LIKE ?) OR (tech_kontakt LIKE ?)', $s, $s, $s, $s), array("order" => "date ASC")));
+	}
+
+function get_events_search_note() {
+	global $f3;
+
+	// Get entries from DB
+		$s = "%".$f3->get('search')."%";
+		$f3->set('dates', $f3->get('db_events')->find(array('veranstaltung LIKE ?', $s), array("order" => "date DESC")));
+	}
+
+function get_notes_search() {
+	global $f3;
+
+	// Get entries from DB
+		$s = "%".$f3->get('search')."%";
+		$f3->set('notes', $f3->get('db_notes')->find(array('(title LIKE ?) OR (note LIKE ?)', $s, $s), array("order" => "date DESC")));
+	}
+	
+function get_todos_search() {
+	global $f3;
+
+	// Get entries from DB
+		$s = "%".$f3->get('search')."%";
+		$f3->set('todos', $f3->get('db_todos')->find(array('(title LIKE ?) OR (kommentar LIKE ?)', $s, $s), array("order" => "date DESC")));
 	}
 
 function backup_tables($host,$user,$pass,$name,$tables = '*')
@@ -146,6 +172,18 @@ function backup_tables($host,$user,$pass,$name,$tables = '*')
 
 	return $return;
 	
+}
+
+function get_notes() {
+	global $f3;
+
+	$f3->set('notes', $f3->get('db_notes')->find('', array("order" => "date DESC")));
+}
+
+function get_todos() {
+	global $f3;
+
+	$f3->set('todos', $f3->get('db_todos')->find('', array("order" => "status DESC")));
 }
 
 ?>

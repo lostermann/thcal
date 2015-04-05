@@ -1,0 +1,22 @@
+<check if="{{ @search <> '' }}">
+	<table class="table thtable top-offset">
+		<thead>
+			<tr>
+				<th>Datum</th>
+				<th>Veranstaltung</th>
+				<th>Auswählen</th>
+			</tr>
+		</thead>
+		<tbody>
+			<repeat group="{{ @dates }}" value="{{ @item }}">
+			<tr class="pointer">
+				<td class="white">{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</td>
+				<td class="yellow">{{ @item.veranstaltung }}</td>
+				<td class="lila width15p">
+					<button id="selectveranst" data-text="{{ @notes_event_name(@item.id) }}" data-id="{{ @item.id }}"class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Veranstaltung wählen"><span class="fa fa-arrow-right fa-lg"></span></button>
+				</td>
+			</tr>
+			</repeat>
+		</tbody>
+	</table>
+</check>

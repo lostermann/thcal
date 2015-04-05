@@ -1,0 +1,160 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+	    <h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<check if="{{ @POST.id == '' }}">
+			<true>
+				<h2>Neues ToDo erstellen</h2>
+			</true>
+			<false>
+				<h2>ToDo bearbeiten: &quot;{{ @POST.title }}&quot;</h2>
+			</false>
+		</check>
+	</div>
+	
+	<form class="form-horizontal hidden-xs hidden-sm" method="post" action="{{ @ALIASES.actionTodo }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+		
+		<div class="row">
+			<div class="col-md-6">
+			<div class="page-header">
+				<h3>ToDo</h3>
+			</div>
+				<div class="form-group">
+					<label for="date" class="col-md-4 control-label">Datum</label>
+					<div class="col-md-8">
+						<div class="input-group date" id="dp" data-date="{{ @todoDate }}" data-date-format="yyyy-mm-dd">
+							<input name="date" class="form-control" type="text" value="{{ @todoDate }}">
+							<span class="input-group-addon pointer"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="title" class="col-md-4 control-label">Titel</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="title" value="{{ @POST.title }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Status</label>
+					<div class="col-md-8">
+						<label class="radio-inline">
+							<input type="radio" name="status" value="new" {{ @todo_checked("new", @POST.status) }}>Neu
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="status" value="ip" {{ @todo_checked("ip", @POST.status) }}>In Bearbeitung
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="status" value="done" {{ @todo_checked("done", @POST.status) }}>Erledigt
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bearbeiter" class="col-md-4 control-label">Bearbeiter</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="bearbeiter" value="{{ @POST.bearbeiter }}">
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="col-md-6">
+				<div class="page-header">
+					<h3>Kommentar</h3>
+				</div>
+				<div class="form-group">
+					<label for="kommentar" class="col-md-4 control-label">Kommentar</label>
+					<div class="col-md-8">
+						<textarea name="kommentar" class="form-control" rows="7">{{ @POST.kommentar }}</textarea>
+					</div>
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>
+					<input type="submit" name="action" value="save" class="defaultSubmit">
+					<check if="{{ @POST.id == '' }}">
+						<false>
+							<button name="action" value="delete" data-tooltip="tooltip" data-placement="top" title="Eintrag löschen" class="btn btn-danger"><span class="fa fa-lg fa-times"></span></button>
+							<button name="action" value="duplicate" data-tooltip="tooltip" data-placement="top" title="Als Duplikat speichern" class="btn btn-info"><span class="fa fa-lg fa-copy"></span></button>
+						</false>
+					</check>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<form class="form hidden-md hidden-lg" method="post" action="{{ @ALIASES.actionTodo }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+
+			<div class="page-header">
+				<h3>Notizeigenschaften</h3>
+			</div>
+			
+			<div class="form-group">
+					<label for="date" class="control-label">Datum</label>
+					<div class="input-group date" id="dp2" data-date="{{ @todoDate }}" data-date-format="yyyy-mm-dd">
+						<span class="input-group-addon pointer"><i class="fa fa-calendar"></i></span>
+						<input name="date" class="form-control" type="text" value="{{ @todoDate }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="title" class="control-label">Titel</label>
+					<input type="text" class="form-control" name="title" value="{{ @POST.title }}">
+				</div>
+				<div class="form-group">
+					<label class="control-label">Status</label><br />
+						<label class="radio-inline">
+							<input type="radio" name="status" value="new" {{ @todo_checked("new", @POST.status) }}>Neu
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="status" value="ip" {{ @todo_checked("ip", @POST.status) }}>In Bearbeitung
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="status" value="done" {{ @todo_checked("done", @POST.status) }}>Erledigt
+						</label>
+				</div>
+				<div class="form-group">
+					<label for="title" class="control-label">Bearbeiter</label>
+					<input type="text" class="form-control" name="bearbeiter" value="{{ @POST.bearbeiter }}">
+				</div>
+				<div class="page-header">
+					<h3>Kommentar</h3>
+				</div>
+				<div class="form-group">
+					<label for="kommentar" class="control-label">Kommentar</label>
+					<textarea name="kommentar" class="form-control" rows="7">{{ @POST.kommentar }}</textarea>
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>
+					<input type="submit" name="action" value="save" class="defaultSubmit">
+					<check if="{{ @POST.id == '' }}">
+						<false>
+							<button name="action" value="delete" data-tooltip="tooltip" data-placement="top" title="Eintrag löschen" class="btn btn-danger"><span class="fa fa-lg fa-times"></span></button>
+							<button name="action" value="duplicate" data-tooltip="tooltip" data-placement="top" title="Als Duplikat speichern" class="btn btn-info"><span class="fa fa-lg fa-copy"></span></button>
+						</false>
+					</check>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+				<p class="text-muted">&nbsp;</p>
+	</form>
+	
+</div>
+
+
+<include href="footer.html" />

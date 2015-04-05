@@ -1,0 +1,59 @@
+<include href="header.html" />
+<include href="nav.html" />
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+    	<h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<h2>Notizen</h2>
+	</div>
+
+	
+	<table class="table table-striped hidden-xs hidden-sm">
+				<thead>
+					<th>Datum</th>
+					<th>Titel</th>
+					<th>Notiz</th>
+					<th>Aktion</th>
+				</thead>
+				<tbody>
+					<repeat group="{{ @notes }}" value="{{ @item }}">
+						<tr>
+							<td>{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</td>
+							<td>{{ @item.title }}
+								<check if="{{ @item.veranst_link <> '' }}">
+								<br /><br /><em>{{ @notes_event_name(@item.veranst_link) }}</em><br /><em>{{ @format_date(@notes_event_date(@item.veranst_link)) }} {{ @format_month(@notes_event_date(@item.veranst_link)) }}</em>
+								</check>
+								</td>
+							<td>{{ @item.note }}</td>
+							<td>
+								<a href="{{ 'editNote', 'id='.@item.id | alias }}">
+									<button data-tooltip="tooltip" data-placemebt="top" title="Notiz bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+							</td>
+						</tr>
+					</repeat>
+				</tbody>
+			</table>
+		
+			<repeat group="{{ @notes }}" value="{{ @item }}">
+					<div class="panel panel-default hidden-md hidden-lg">
+					<div class="panel-heading">
+					<a class="pull-right" href="{{ 'editNote', 'id='.@item.id | alias }}"><button data-tooltip="tooltip" data-placemebt="top" title="Notiz bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+		<h4>{{ @item.title }} ({{ @format_date(@item.date) }} {{ @format_month(@item.date) }})</h4>
+			
+		</div>
+		<div class="panel-body">
+			<p>{{ @item.note }}</p>
+			<check if="{{ @item.veranst_link <> '' }}">
+								<p><em>{{ @notes_event_name(@item.veranst_link) }}</em><br /><em>{{ @format_date(@notes_event_date(@item.veranst_link)) }} {{ @format_month(@notes_event_date(@item.veranst_link)) }}</em></p>
+								</check>
+		</div>
+	</div>
+	</repeat>
+</div>
+		
+
+<include href="footer.html" />

@@ -91,4 +91,51 @@ $f3->set('lowercase',
 	function($s) {
 		return strtolower($s);
 });
+
+$f3->set('notes_event_name',
+	function($id) {
+		global $f3;
+		
+		if ($id <> "") {
+		 	return $f3->get('db_events')->load(array('id LIKE ?', $id))->get('veranstaltung');
+		 }
+	});
+	
+$f3->set('notes_event_date',
+	function($id) {
+		global $f3;
+		
+		if ($id <> "") {
+		 	return $f3->get('db_events')->load(array('id LIKE ?', $id))->get('date');
+		 }
+	});
+	
+	$f3->set('todos_icon',
+	function($s) {
+		switch ($s) {
+			case "new":
+				return '<i class="fa fa-bell-o fa-lg"></i>'; break;
+			case "ip":
+				return '<i class="fa fa-spinner fa-lg"></i>'; break;
+			case "done":
+				return '<i class="fa fa-check fa-lg todo-done"></i>'; break;
+
+		}
+		
+	});
+
+$f3->set('todo_checked',
+	function($l, $x) {
+		$r = "";
+		if ($l == $x) $r = "checked";
+		return $r;
+});
+
+$f3->set('new_todos', 
+function() {
+	global$f3;
+	
+	return $f3->get('db_todos')->count('status="new"');
+});
+
 ?>

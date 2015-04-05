@@ -21,7 +21,10 @@
 	</form>
 
 	<check if="{{ @search <> '' }}">
-	<table class="table thtable hidden-xs hidden-sm top-offset">
+	<div class="page-header">
+		<h2>Veranstaltungen</h2>
+	</div>
+	<table class="table thtable hidden-xs hidden-sm">
 		<thead>
 			<tr>
 				<th>Datum</th>
@@ -41,7 +44,7 @@
 				<td class="yellow">{{ @item.agentur }}</td>
 				<td class= "grey">{{ @item.tech_kontakt }}</td>
 				<td class="lila width15p">
-					<button data-toggle="modal" data-target="#modal-{{ @item.id }}" class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
+					<button class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Details anzeigen"><span class="fa fa-info-circle fa-lg"></span></button>
 					<check if="{{ @SESSION.user_level > 1 }}">
 						<a href="/edit/{{ @item.id }}"><button class="btn btn-sm btn-1" data-tooltip="tooltip" data-placement="top" title="Eintrag bearbeiten"><span class="fa fa-pencil-square-o fa-lg"></span></button></a>
 					</check>
@@ -51,7 +54,7 @@
 		</tbody>
 	</table>
 
-	<div class="list-group hidden-md hidden-lg top-offset">
+	<div class="list-group hidden-md hidden-lg">
 		<repeat group="{{ @dates }}" value="{{ @item }}">
 		<a href="/details/{{ @item.id }}" class="list-group-item">
 			<h4 class="list-group-item-heading">{{ @item.veranstaltung }}</h4>
@@ -59,6 +62,102 @@
 		</a>
 		</repeat>
 	</div>
+	
+	<div class="page-header">
+		<h2>Notizen</h2>
+	</div>
+	
+	<table class="table table-striped hidden-xs hidden-sm">
+				<thead>
+					<th>Datum</th>
+					<th>Titel</th>
+					<th>Notiz</th>
+					<th>Aktion</th>
+				</thead>
+				<tbody>
+					<repeat group="{{ @notes }}" value="{{ @item }}">
+						<tr>
+							<td>{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</td>
+							<td>{{ @item.title }}
+								<check if="{{ @item.veranst_link <> '' }}">
+								<br /><br /><em>{{ @notes_event_name(@item.veranst_link) }}</em><br /><em>{{ @format_date(@notes_event_date(@item.veranst_link)) }} {{ @format_month(@notes_event_date(@item.veranst_link)) }}</em>
+								</check>
+								</td>
+							<td>{{ @item.note }}</td>
+							<td>
+								<a href="{{ 'editNote', 'id='.@item.id | alias }}">
+									<button data-tooltip="tooltip" data-placemebt="top" title="Notiz bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+							</td>
+						</tr>
+					</repeat>
+				</tbody>
+			</table>
+		
+			<repeat group="{{ @notes }}" value="{{ @item }}">
+					<div class="panel panel-default hidden-md hidden-lg">
+					<div class="panel-heading">
+					<a class="pull-right" href="{{ 'editNote', 'id='.@item.id | alias }}"><button data-tooltip="tooltip" data-placemebt="top" title="Notiz bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+		<h4>{{ @item.title }} ({{ @format_date(@item.date) }} {{ @format_month(@item.date) }})</h4>
+			
+		</div>
+		<div class="panel-body">
+			<p>{{ @item.note }}</p>
+			<check if="{{ @item.veranst_link <> '' }}">
+								<p><em>{{ @notes_event_name(@item.veranst_link) }}</em><br /><em>{{ @format_date(@notes_event_date(@item.veranst_link)) }} {{ @format_month(@notes_event_date(@item.veranst_link)) }}</em></p>
+								</check>
+		</div>
+	</div>
+	</repeat>
+	
+	<div class="page-header">
+		<h2>ToDos</h2>
+	</div>
+	
+	<table class="table table-striped hidden-xs hidden-sm">
+				<thead>
+					<th>Status</th>
+					<th>Datum</th>
+					<th>Titel</th>
+					<th>Bearbeiter</th>
+					<th>Kommentar</th>
+					<th>Aktion</th>
+				</thead>
+				<tbody>
+					<repeat group="{{ @todos }}" value="{{ @item }}">
+						<tr>
+							<td>{{ @todos_icon(@item.status) }}</td>
+							<td>{{ @format_date(@item.date) }} {{ @format_month(@item.date) }}</td>
+							<td>{{ @item.title }}</td>
+							<td>{{ @item.bearbeiter }}</td>
+							<td>{{ @item.kommentar }}</td>
+							<td>
+								<a href="{{ 'editTodo', 'id='.@item.id | alias }}">
+									<button data-tooltip="tooltip" data-placemebt="top" title="ToDo bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+							</td>
+						</tr>
+					</repeat>
+				</tbody>
+			</table>
+
+			
+			<repeat group="{{ @todos }}" value="{{ @item }}">
+					<div class="panel panel-default hidden-md hidden-lg">
+					<div class="panel-heading">
+					<a class="pull-right" href="{{ 'editTodo', 'id='.@item.id | alias }}"><button data-tooltip="tooltip" data-placemebt="top" title="ToDo bearbeiten" class="btn btn-sm btn-primary"><span class="fa fa-pencil-square fa-lg"></span></button></a>
+		<h4>{{ @todos_icon(@item.status) }} &nbsp; {{ @item.title }} ({{ @format_date(@item.date) }} {{ @format_month(@item.date) }})</h4>
+			
+		</div>
+		<div class="panel-body">
+			<p>{{ @item.kommentar }}</p>
+			<check if="{{ @item.bearbeiter <> '' }}">
+				<p><em>Bearbeiter: {{ @item.bearbeiter }}</em></p>	
+			</check>
+		</div>
+	</div>
+				
+					
+					</repeat>
+	
 	</check>
 
 </div>

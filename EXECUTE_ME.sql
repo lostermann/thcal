@@ -1,6 +1,32 @@
-DROP TABLE thcal;
+-- phpMyAdmin SQL Dump
+-- version 3.5.8.1
+-- http://www.phpmyadmin.net
+--
+-- Host: dd28008.kasserver.com
+-- Erstellungszeit: 05. Apr 2015 um 19:01
+-- Server Version: 5.5.40-nmm1-log
+-- PHP-Version: 5.3.28-nmm2
 
-CREATE TABLE `thcal` (
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Datenbank: `d01bc4ae`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur fÃ¼r Tabelle `thcal`
+--
+
+CREATE TABLE IF NOT EXISTS `thcal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `veranstaltung` text NOT NULL,
@@ -21,13 +47,39 @@ CREATE TABLE `thcal` (
   `xtra_rentals` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `xtra_personal` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1076 ;
 
-INSERT INTO demo VALUES("1","2014-11-01","The Rolling Stones","K","21:30:00","15:00:00","14:00:00","Y","XX","YY","ZZ","Jeder eigenes Hotelzimmer!","Music Productions, UK","Mike Randel","Amps!","Mehr Amps!","30x Shure SM-58","Pyrotechnik, Flammenwerfer","Hostess für Jagger");
-INSERT INTO demo VALUES("2","2014-11-15","The Rolling Stones","K","21:30:00","15:00:00","14:00:00","Y","XX","YY","ZZ","Jeder eigenes Hotelzimmer!","Music Productions, UK","Mike Randel","Amps!","Mehr Amps!","30x Shure SM-58","Pyrotechnik, Flammenwerfer"," Hostess für Jagger");
-INSERT INTO demo VALUES("3","2014-11-05","Jimi Hendrix","T","20:30:00","17:00:00","17:00:00","Y","YY","XX","AA","Backup-Gitarrist kommt um 6.","Hendrix Booking Inc.","Jimi +49 123 12345678","Drumset","","",""," ");
-INSERT INTO demo VALUES("4","2014-11-26","Jazz Café","S","17:00:00","16:30:00","16:00:00","","AA","TT","LL","organisiert vom Mozarteum","","","","","",""," ");
-INSERT INTO demo VALUES("5","2014-11-29","Led Zeppelin","K","20:00:00","16:00:00","15:00:00","Y","alle","XX","-","Tour-Abschluss","","","","","","Pyro"," ");
+-- --------------------------------------------------------
 
+--
+-- Tabellenstruktur fÃ¼r Tabelle `thcal_notes`
+--
 
+CREATE TABLE IF NOT EXISTS `thcal_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `title` text NOT NULL,
+  `note` text NOT NULL,
+  `veranst_link` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur fÃ¼r Tabelle `thcal_todos`
+--
+
+CREATE TABLE IF NOT EXISTS `thcal_todos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `title` text NOT NULL,
+  `kommentar` text NOT NULL,
+  `status` text NOT NULL,
+  `bearbeiter` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

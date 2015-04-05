@@ -1,0 +1,172 @@
+	<include href="header.html" />
+<include href="nav.html" />
+
+
+<div class="modal fade" id="select">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Veranstaltung auswählen</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+	        <input type="text" class="form-control" id="searchveranst" placeholder="Nach Veranstaltung suchen&hellip;" name="searchveranst">
+        </form>
+        <div id="searchip" class="text-center">
+        	<i class="fa fa-refresh fa-spin fa-3x"></i><br /><br />Einen Moment
+        </div>
+        <div id="searchveranstresults">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container">
+
+	<div class="page-header hidden-xs">
+	    <h1>th-cal.TK <small>Treibhaus Technik Terminplanung</small></h1>
+	</div>
+
+	<div class="text-center">
+		<check if="{{ @POST.id == '' }}">
+			<true>
+				<h2>Neue Notiz erstellen</h2>
+			</true>
+			<false>
+				<h2>Notiz bearbeiten: &quot;{{ @POST.title }}&quot;</h2>
+			</false>
+		</check>
+	</div>
+	
+	<form class="form-horizontal hidden-xs hidden-sm" method="post" action="{{ @ALIASES.actionNote }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+		
+		<div class="row">
+			<div class="col-md-6">
+			<div class="page-header">
+				<h3>Notizeigenschaften</h3>
+			</div>
+				<div class="form-group">
+					<label for="date" class="col-md-4 control-label">Datum</label>
+					<div class="col-md-8">
+						<div class="input-group date" id="dp" data-date="{{ @noteDate }}" data-date-format="yyyy-mm-dd">
+							<input name="date" class="form-control" type="text" value="{{ @noteDate }}">
+							<span class="input-group-addon pointer"><i class="fa fa-calendar"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="title" class="col-md-4 control-label">Titel</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" name="title" value="{{ @POST.title }}">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="veranst" class="col-md-4 control-label">Veranstaltung</label>
+					<div class="col-md-8">
+						<div class="input-group">
+							<input type="text" id="veranst" name="veranst" value="{{ @notes_event_name(@POST.veranst_link) }}" class="form-control" readonly>
+							<input type="hidden" name="veranst_link" id="veranst_link" value="{{ @POST.veranst_link }}">
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#select">Auswählen</button>
+								<button class="btn btn-default" type="button" id="veranst_delete"><i class="fa fa-times "></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="page-header">
+					<h3>Notiz</h3>
+				</div>
+				<div class="form-group">
+					<label for="note" class="col-md-4 control-label">Notiz</label>
+					<div class="col-md-8">
+						<textarea name="note" class="form-control" rows="7">{{ @POST.note }}</textarea>
+					</div>
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>
+					<input type="submit" name="action" value="save" class="defaultSubmit">
+					<check if="{{ @POST.id == '' }}">
+						<false>
+							<button name="action" value="delete" data-tooltip="tooltip" data-placement="top" title="Eintrag löschen" class="btn btn-danger"><span class="fa fa-lg fa-times"></span></button>
+							<button name="action" value="duplicate" data-tooltip="tooltip" data-placement="top" title="Als Duplikat speichern" class="btn btn-info"><span class="fa fa-lg fa-copy"></span></button>
+						</false>
+					</check>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<form class="form hidden-md hidden-lg" method="post" action="{{ @ALIASES.actionNote }}" role="form">
+	
+		<input type="hidden" name="id" value="{{ @POST.id }}">
+		<input type="hidden" name="backLink" value="{{ @backLink }}">
+
+			<div class="page-header">
+				<h3>Notizeigenschaften</h3>
+			</div>
+			
+			<div class="form-group">
+					<label for="date" class="control-label">Datum</label>
+					<div class="input-group date" id="dp2" data-date="{{ @noteDate }}" data-date-format="yyyy-mm-dd">
+						<span class="input-group-addon pointer"><i class="fa fa-calendar"></i></span>
+						<input name="date" class="form-control" type="text" value="{{ @noteDate }}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="title" class="control-label">Titel</label>
+					<input type="text" class="form-control" name="title" value="{{ @POST.title }}">
+				</div>
+				<div class="form-group">
+					<label for="veranst" class="control-label">Veranstaltung</label>
+					<div class="input-group">
+							<input type="text" id="veranst2" name="veranst" value="{{ @notes_event_name(@POST.veranst_link) }}" class="form-control" readonly>
+							<input type="hidden" name="veranst_link" id="veranst_link2" value="{{ @POST.veranst_link }}">
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#select">Auswählen</button>
+								<button class="btn btn-default" type="button" id="veranst_delete2"><i class="fa fa-times "></i></button>
+							</div>
+						</div>
+				</div>
+				<div class="page-header">
+					<h3>Notiz</h3>
+				</div>
+				<div class="form-group">
+					<label for="note" class="control-label">Notiz</label>
+					<textarea name="note" class="form-control" rows="7">{{ @POST.note }}</textarea>
+				</div>
+				<div class="page-header">
+					<h3>Aktionen</h3>
+				</div>
+				<div class="text-center">
+					<a href="{{ @backLink }}"><button type="button" data-tooltip="tooltip" data-placement="top" title="Zurück" class="btn btn-default"><span class="fa fa-toggle-left fa-lg"></span></button></a>
+					<input type="submit" name="action" value="save" class="defaultSubmit">
+					<check if="{{ @POST.id == '' }}">
+						<false>
+							<button name="action" value="delete" data-tooltip="tooltip" data-placement="top" title="Eintrag löschen" class="btn btn-danger"><span class="fa fa-lg fa-times"></span></button>
+							<button name="action" value="duplicate" data-tooltip="tooltip" data-placement="top" title="Als Duplikat speichern" class="btn btn-info"><span class="fa fa-lg fa-copy"></span></button>
+						</false>
+					</check>	
+					<button name="action" value="save" data-tooltip="tooltip" data-placement="top" title="Speichern" class="btn btn-success"><span class="fa fa-lg fa-save"></span></button>
+				</div>
+				<p class="text-muted">&nbsp;</p>
+	</form>
+	
+</div>
+
+
+<include href="footer.html" />
