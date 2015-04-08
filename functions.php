@@ -58,7 +58,7 @@ function logged_in() {
 		} else {
 			// User is not logged in.
 			$f3->set('SESSION.user_level', '');
-			// echo Template::instance()->render('session_expired.html');
+			echo Template::instance()->render('session_expired.html');
 			return false;
 		}
 }
